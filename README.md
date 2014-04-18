@@ -1,4 +1,4 @@
-Presentation Example: Efficient-Design
+Presentation Example: Effective Design
 =====================================
 
 An examples project aiming to demonstrate a few key design topics for Android Applications. This project is meant to accompany the following slides for a presentation given at a local Android Meetup event.
