@@ -3,6 +3,7 @@ package com.presentation.examples;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -17,12 +18,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.presentation.examples.adapters.NavigationAdapter;
 import com.presentation.examples.fragments.ABaseFragment;
+import com.presentation.examples.fragments.ListViewWithCompoundViewFragment;
 import com.presentation.examples.fragments.ListViewWithoutCompoundViewFragment;
 
+/**
+ * A standardish implementation of an Android Navigation Drawer. Nothing exciting here.
+ */
 public class NavigationDrawerFragment extends Fragment {
 
 	private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
@@ -171,7 +177,7 @@ public class NavigationDrawerFragment extends Fragment {
 			ft.addToBackStack(tag);
 		ft.replace(R.id.container, fragment, tag);
 		ft.commit();
-		
+
 		// Set the subtitle
 		getActionBar().setSubtitle(tag);
 	}
@@ -213,6 +219,95 @@ public class NavigationDrawerFragment extends Fragment {
 
 	private ActionBar getActionBar() {
 		return getActivity().getActionBar();
+	}
+
+	private static final class NavigationAdapter extends BaseAdapter {
+
+		// @formatter:off
+		private static final NavItemData[] NAV_ITEMS = new NavItemData[] {
+			new NavItemData(ListViewWithoutCompoundViewFragment.class, new ListViewWithoutCompoundViewFragment().getFragmentTitleResourceId())
+			, new NavItemData(ListViewWithCompoundViewFragment.class, new ListViewWithCompoundViewFragment().getFragmentTitleResourceId())
+		};
+		// @formatter:on
+
+		private final LayoutInflater mInflater;
+
+		public NavigationAdapter(Context context) {
+			mInflater = LayoutInflater.from(context);
+		}
+
+		@Override
+		public int getCount() {
+			return NAV_ITEMS.length;
+		}
+
+		@Override
+		public NavItemData getItem(int postion) {
+			return NAV_ITEMS[postion];
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return true;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup viewGroup) {
+			final NavItemData navItem = getItem(position);
+			final NavItemView navItemView;
+
+			if (convertView == null) {
+				convertView = mInflater.inflate(android.R.layout.simple_list_item_1, null);
+				navItemView = new NavItemView(convertView);
+				convertView.setTag(navItemView);
+			} else {
+				navItemView = (NavItemView) convertView.getTag();
+			}
+
+			navItemView.updateView(navItem);
+
+			return convertView;
+		}
+
+		public ABaseFragment getNewFragmentInstance(int position) {
+			try {
+				return getItem(position).mFragmentClass.newInstance();
+			} catch (java.lang.InstantiationException | IllegalAccessException e) {
+				throw new RuntimeException();
+			}
+		}
+
+		private static final class NavItemData {
+
+			private final Class<? extends ABaseFragment> mFragmentClass;
+			private final int mNameResourceId;
+
+			NavItemData(Class<? extends ABaseFragment> fragmentClass, int nameResourceId) {
+				mFragmentClass = fragmentClass;
+				mNameResourceId = nameResourceId;
+			}
+
+		}
+
+		private static final class NavItemView {
+
+			private final TextView mTextView;
+
+			NavItemView(View convertView) {
+				mTextView = (TextView) convertView.findViewById(android.R.id.text1);
+			}
+
+			void updateView(NavItemData navItem) {
+				mTextView.setText(navItem.mNameResourceId);
+			}
+
+		}
+
 	}
 
 }

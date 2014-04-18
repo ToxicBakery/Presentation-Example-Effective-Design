@@ -12,6 +12,9 @@ import com.presentation.examples.R;
 /**
  * This is an efficient view that self manages the display of data and when used with a {@link ListView} also provides
  * an inherent ViewHolder pattern.
+ * 
+ * @see <a href="http://developer.android.com/guide/topics/ui/custom-components.html#compound">Android Compound
+ *      Controls</a>
  */
 public class CompoundView extends RelativeLayout {
 

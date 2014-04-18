@@ -1,11 +1,9 @@
 package com.presentation.examples.fragments;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.presentation.examples.R;
@@ -18,12 +16,8 @@ public class ListViewWithoutCompoundViewFragment extends AListViewFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-		final ListView view = new ListView(getActivity());
-		view.setAdapter(new BasicAdapter(getActivity()));
-
-		return view;
+	protected ABaseAdapter getAdapterInstance() {
+		return new BasicAdapter(getActivity());
 	}
 
 	/**
@@ -54,6 +48,13 @@ public class ListViewWithoutCompoundViewFragment extends AListViewFragment {
 			return convertView;
 		}
 
+		/**
+		 * A simple ViewHolder pattern implementation.
+		 * 
+		 * @see <a
+		 *      href="http://developer.android.com/training/improving-layouts/smooth-scrolling.html#ViewHolder">Android
+		 *      ViewHolder Pattern</a>
+		 */
 		static final class ViewHolder {
 
 			final TextView textViewOne;
