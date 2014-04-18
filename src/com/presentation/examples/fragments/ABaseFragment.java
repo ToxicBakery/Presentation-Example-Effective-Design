@@ -15,5 +15,13 @@ public abstract class ABaseFragment extends Fragment {
 	 * @return
 	 */
 	public abstract int getFragmentTitleResourceId();
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		// Set the subtitle of the ActionBar
+		getActivity().getActionBar().setSubtitle(getFragmentTitleResourceId());
+	}
 
 }

@@ -177,9 +177,6 @@ public class NavigationDrawerFragment extends Fragment {
 			ft.addToBackStack(tag);
 		ft.replace(R.id.container, fragment, tag);
 		ft.commit();
-
-		// Set the subtitle
-		getActionBar().setSubtitle(tag);
 	}
 
 	@Override
