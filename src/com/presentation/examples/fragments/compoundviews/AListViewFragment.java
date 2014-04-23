@@ -1,4 +1,6 @@
-package com.presentation.examples.fragments;
+package com.presentation.examples.fragments.compoundviews;
+
+import com.presentation.examples.fragments.ABaseFragment;
 
 import android.content.Context;
 import android.os.Bundle;

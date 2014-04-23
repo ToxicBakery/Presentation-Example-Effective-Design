@@ -23,8 +23,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.presentation.examples.fragments.ABaseFragment;
-import com.presentation.examples.fragments.ListViewWithCompoundViewFragment;
-import com.presentation.examples.fragments.ListViewWithoutCompoundViewFragment;
+import com.presentation.examples.fragments.compoundviews.ListViewWithCompoundViewFragment;
+import com.presentation.examples.fragments.compoundviews.ListViewWithoutCompoundViewFragment;
+import com.presentation.examples.fragments.interfacesvsintents.UsingIntentsFragment;
+import com.presentation.examples.fragments.interfacesvsintents.UsingInterfacesFragment;
 
 /**
  * A standardish implementation of an Android Navigation Drawer. Nothing exciting here.
@@ -224,6 +226,8 @@ public class NavigationDrawerFragment extends Fragment {
 		private static final NavItemData[] NAV_ITEMS = new NavItemData[] {
 			new NavItemData(ListViewWithoutCompoundViewFragment.class, new ListViewWithoutCompoundViewFragment().getFragmentTitleResourceId())
 			, new NavItemData(ListViewWithCompoundViewFragment.class, new ListViewWithCompoundViewFragment().getFragmentTitleResourceId())
+			, new NavItemData(UsingInterfacesFragment.class, new UsingInterfacesFragment().getFragmentTitleResourceId())
+			, new NavItemData(UsingIntentsFragment.class, new UsingIntentsFragment().getFragmentTitleResourceId())
 		};
 		// @formatter:on
 

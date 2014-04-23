@@ -7,5 +7,10 @@
     <!-- Fragment Titles -->
     <string name="title_listview_without_compound_view">ListView Typical</string>
     <string name="title_listview_with_compound_view">ListView CompoundView</string>
+    <string name="title_using_interfaces">Using Interfaces</string>
+    <string name="title_using_intents">Using Intents</string>
+    <!-- Edit Data Fragment -->
+    <string name="edit_data_button_add_string">Add String</string>
+    <string name="edit_data_button_remove_string">Remove String</string>
 
 </resources>

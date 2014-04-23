@@ -1,4 +1,4 @@
-package com.presentation.examples.fragments;
+package com.presentation.examples.fragments.compoundviews;
 
 import android.content.Context;
 import android.view.LayoutInflater;
